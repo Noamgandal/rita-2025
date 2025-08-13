@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥜 Boten's 28th Birthday !🥜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdf8f0;
+            overflow-x: hidden; /* Prevent horizontal scrollbar from emojis */
+        }
+        h1, h2, h3, button {
+            font-family: 'Playfair Display', serif;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.75rem;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: #bae6fd; /* Softer, lighter blue */
+            border-radius: 50%;
+            border: 2px solid #fdf8f0;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        /* Floating Emojis */
+        .emoji {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2rem;
+            animation: float-up linear;
+            opacity: 0;
+            z-index: -1; /* Place behind content */
+        }
+        @keyframes float-up {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        /* Countdown Timer */
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        #countdown div {
+            background-color: rgba(224, 242, 254, 0.8); /* Lighter Sky Blue background */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        #countdown div span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0369a1; /* Darker Sky Blue text */
+        }
+        /* Secret Message Modal */
+        #secret-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1000;
+        }
+        #secret-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        #secret-modal.show .modal-content {
+            transform: scale(1);
+        }
+        #modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            direction: rtl;
+        }
+        #modal-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            direction: rtl; /* Right-to-left for Hebrew */
+        }
+        #close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Emoji Container -->
+    <div id="emoji-container"></div>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl relative z-10">
+        
+        <!-- Header Section -->
+        <header class="text-center my-8 md:my-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900">🥜 Boten's 28th Birthday !🥜</h1>
+            <!-- Countdown Timer -->
+            <div id="countdown-container">
+                <h3 class="text-xl mt-4 text-gray-700">The Adventure Begins In:</h3>
+                <div id="countdown">
+                    <div><span id="days">0</span>Days</div>
+                    <div><span id="hours">0</span>Hours</div>
+                    <div><span id="minutes">0</span>Mins</div>
+                    <div><span id="seconds">0</span>Secs</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Itinerary Section -->
+        <main>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10">Our Jerusalem Itinerary</h2>
+
+            <!-- Day 1 Accordion -->
+            <div class="mb-4">
+                <button id="day1-toggle" class="w-full flex justify-between items-center text-left text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#d1a388] pb-2 focus:outline-none">
+                    <span>Friday, August 16th</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="day1-content" class="accordion-content">
+                    <div class="relative pl-12 border-l-2 border-dashed border-gray-300 py-4">
+                        <div class="timeline-item mb-8">
+                            <time class="font-mono text-sm text-[#d1a388]">Late Morning</time>
+                            <h4 class="font-semibold text-lg text-gray-900">Israel Museum</h4>
+                            <p class="text-gray-600">Visiting the special exhibition <span class="font-bold">'כריס מרקר: הצילומים האבודים מישראל'</span>, featuring black and white photos from the 1960s.</p>
+                        </div>
+                        <div class="timeline-item mb-8">
+                            <time class="font-mono text-sm text-[#d1a388]">15:00</time>
+                            <h4 class="font-semibold text-lg text-gray-900">Hotel Check-in & Relaxation</h4>
+                            <p class="text-gray-600">We'll check into the beautiful <span class="font-bold">The American Colony Hotel</span> and unwind by the pool.</p>
+                        </div>
+                        <div class="timeline-item mb-8">
+                            <time class="font-mono text-sm text-[#d1a388]">19:00</time>
+                            <h4 class="font-semibold text-lg text-gray-900">Sunset Over the Old City</h4>
+                            <p class="text-gray-600">Experience breathtaking views of the sunset from the <span class="font-bold">Notre Dame Hotel</span> rooftop.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <time class="font-mono text-sm text-[#d1a388]">20:30</time>
+                            <h4 class="font-semibold text-lg text-gray-900">Birthday Dinner at Mona</h4>
+                            <p class="text-gray-600">A special and delicious birthday dinner to celebrate you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 Accordion -->
+            <div class="mb-4">
+                <button id="day2-toggle" class="w-full flex justify-between items-center text-left text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#d1a388] pb-2 focus:outline-none">
+                    <span>Saturday, August 17th</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="day2-content" class="accordion-content">
+                    <div class="relative pl-12 border-l-2 border-dashed border-gray-300 py-4">
+                        <div class="timeline-item mb-8">
+                            <time class="font-mono text-sm text-[#d1a388]">Morning</time>
+                            <h4 class="font-semibold text-lg text-gray-900">A Leisurely Morning</h4>
+                            <p class="text-gray-600">Enjoy a slow morning, perhaps with another dip in the pool or a quiet coffee in the hotel gardens.</p>
+                        </div>
+                        <div class="timeline-item mb-8">
+                            <time class="font-mono text-sm text-[#d1a388]">14:00</time>
+                            <h4 class="font-semibold text-lg text-gray-900">Wine Tasting at Sfera Winery</h4>
+                            <p class="text-gray-600">We'll head to <span class="font-bold">יקב ספרה</span> for a delightful wine tasting experience.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold text-lg text-gray-900">Afternoon: Homeward Bound</h4>
+                            <p class="text-gray-600">Driving home relaxed, happy, and full of wonderful new memories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Secret Message Button -->
+        <div class="text-center my-12">
+            <button id="secret-button" class="bg-[rgba(224,242,254,0.8)] text-[#0369a1] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-opacity-90 transition-transform transform hover:scale-105">
+                A Secret Message Just For You
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 py-6 border-t border-gray-200">
+            <p class="text-gray-600">Happy Birthday, my love!</p>
+        </footer>
+    </div>
+
+    <!-- Secret Modal -->
+    <div id="secret-modal">
+        <div class="modal-content">
+            <button id="close-modal">&times;</button>
+            <h3 id="modal-title"></h3>
+            <p id="modal-text"></p>
+            <div class="mt-6">
+                <button id="default-message-btn" class="text-xs text-gray-500 hover:underline focus:outline-none">Get the default message</button>
+                <button id="personal-message-btn" class="text-xs text-gray-500 hover:underline focus:outline-none" style="display: none;">Back to the Pupsikit message</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Accordion Logic ---
+        const accordions = [
+            { toggle: document.getElementById('day1-toggle'), content: document.getElementById('day1-content') },
+            { toggle: document.getElementById('day2-toggle'), content: document.getElementById('day2-content') }
+        ];
+
+        accordions.forEach((acc, index) => {
+            const icon = acc.toggle.querySelector('svg');
+            if (index === 0) {
+                acc.content.style.maxHeight = acc.content.scrollHeight + "px";
+            } else {
+                icon.style.transform = 'rotate(-90deg)';
+            }
+            acc.toggle.addEventListener('click', () => {
+                const isOpen = acc.content.style.maxHeight;
+                if (isOpen) {
+                    acc.content.style.maxHeight = null;
+                    icon.style.transform = 'rotate(-90deg)';
+                } else {
+                    acc.content.style.maxHeight = acc.content.scrollHeight + "px";
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // --- Countdown Timer Logic ---
+        const countdownDate = new Date("Aug 17, 2025 11:00:00").getTime();
+        const countdownFunction = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown-container").innerHTML = "<h3 class='text-xl mt-4 text-gray-700'>The Adventure Has Begun!</h3>";
+            }
+        }, 1000);
+
+        // --- Floating Emoji Logic ---
+        const emojiContainer = document.getElementById('emoji-container');
+        const emojis = ['🥜', '🍷', '📷', '🎂', '❤️', '🏊‍♀️', '🕌'];
+        
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = Math.random() * 5 + 8 + 's'; // 8-13 seconds
+            
+            emojiContainer.appendChild(emoji);
+
+            setTimeout(() => {
+                emoji.remove();
+            }, 13000); // Remove after 13 seconds
+        }
+        setInterval(createEmoji, 1500); // Create an emoji every 1.5 seconds
+
+        // --- Secret Modal Logic ---
+        const secretButton = document.getElementById('secret-button');
+        const closeModalButton = document.getElementById('close-modal');
+        const defaultMessageBtn = document.getElementById('default-message-btn');
+        const personalMessageBtn = document.getElementById('personal-message-btn');
+        const modal = document.getElementById('secret-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalText = document.getElementById('modal-text');
+
+        const messages = [
+            {
+                title: "ברכה אישית",
+                text: "אהבה שלי, אני כל כך גאה בך כל יום מחדש. את אישה מקסימה, חכמה, יפה והחברה הכי טובה שלי. אני מתרגש לבלות איתך עוד שנה של אהבה והתחברות, ואמןןן ניו יורק. אני מאחל לך שנה של צחוקים, התרגשות, הצלחה והתחברות לאני הפנימי שלך. אני אוהב אותך בוטן"
+            },
+            {
+                title: "ברכת הבית",
+                text: "יְהִי רָצוֹן מִלִּפְנֵי אָבִינוּ שֶׁבַּשָּׁמַיִם, שֶׁיַּשְׁרֶה שְׁכִינָתוֹ בֵּינֵיכֶם, וְיִמָּלֵא בֵּיתְכֶם בְּאַהֲבָה וְאַחְוָה, שָׁלוֹם וְרֵעוּת. וְתִזְכּוּ לִרְאוֹת דּוֹרוֹת יְשָׁרִים וּמְבֹרָכִים. אָמֵן."
+            }
+        ];
+
+        secretButton.addEventListener('click', () => {
+            // Always show the personal message first when the modal opens
+            modalTitle.innerText = messages[0].title;
+            modalText.innerText = messages[0].text;
+            defaultMessageBtn.style.display = 'inline-block';
+            personalMessageBtn.style.display = 'none';
+            modal.classList.add('show');
+        });
+
+        defaultMessageBtn.addEventListener('click', () => {
+            // Switch to the "default" (funny) message
+            modalTitle.innerText = messages[1].title;
+            modalText.innerText = messages[1].text;
+            defaultMessageBtn.style.display = 'none';
+            personalMessageBtn.style.display = 'inline-block';
+        });
+
+        personalMessageBtn.addEventListener('click', () => {
+            // Switch back to the personal message
+            modalTitle.innerText = messages[0].title;
+            modalText.innerText = messages[0].text;
+            personalMessageBtn.style.display = 'none';
+            defaultMessageBtn.style.display = 'inline-block';
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+
+    </script>
+
+</body>
+</html>
