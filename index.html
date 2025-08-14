@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🥜Boten's 28th!🥜</title>
+    <title>🥜 Boten's 28th Birthday !🥜</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -54,18 +54,18 @@
         #countdown {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 0.5rem; /* Reduced gap for mobile */
         }
         #countdown div {
             background-color: rgba(224, 242, 254, 0.8); /* Lighter Sky Blue background */
-            padding: 0.5rem 1rem;
+            padding: 0.5rem; /* Reduced padding for mobile */
             border-radius: 0.5rem;
             text-align: center;
+            min-width: 60px;
         }
         #countdown div span {
             display: block;
-            font-size: 2rem;
+            font-size: 1.75rem; /* Slightly smaller for mobile */
             font-weight: bold;
             color: #0369a1; /* Darker Sky Blue text */
         }
@@ -91,10 +91,11 @@
         }
         .modal-content {
             background-color: #fff;
-            padding: 2rem;
+            padding: 1.5rem; /* Reduced padding for mobile */
             border-radius: 1rem;
             text-align: center;
-            max-width: 500px;
+            max-width: 90%;
+            width: 500px;
             position: relative;
             transform: scale(0.9);
             transition: transform 0.3s;
@@ -104,12 +105,12 @@
         }
         #modal-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
+            font-size: 1.5rem; /* Adjusted for mobile */
             margin-bottom: 1rem;
             direction: rtl;
         }
         #modal-text {
-            font-size: 1.1rem;
+            font-size: 1rem; /* Adjusted for mobile */
             line-height: 1.8;
             direction: rtl; /* Right-to-left for Hebrew */
         }
@@ -122,6 +123,28 @@
             border: none;
             background: none;
         }
+
+        /* Desktop Styles */
+        @media (min-width: 640px) {
+            #countdown {
+                gap: 1rem;
+            }
+            #countdown div {
+                padding: 0.5rem 1rem;
+            }
+            #countdown div span {
+                font-size: 2rem;
+            }
+            .modal-content {
+                padding: 2rem;
+            }
+             #modal-title {
+                font-size: 1.75rem;
+            }
+            #modal-text {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -129,11 +152,11 @@
     <!-- Emoji Container -->
     <div id="emoji-container"></div>
 
-    <div class="container mx-auto p-4 md:p-8 max-w-4xl relative z-10">
+    <div class="container mx-auto p-3 sm:p-6 md:p-8 max-w-4xl relative z-10">
         
         <!-- Header Section -->
         <header class="text-center my-8 md:my-12">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-900">🥜 Boten's 28th Birthday !🥜</h1>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900">Boten's 28th! 🥜</h1>
             <!-- Countdown Timer -->
             <div id="countdown-container">
                 <h3 class="text-xl mt-4 text-gray-700">The Adventure Begins In:</h3>
@@ -157,26 +180,26 @@
                     <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="day1-content" class="accordion-content">
-                    <div class="relative pl-12 border-l-2 border-dashed border-gray-300 py-4">
-                        <div class="timeline-item mb-8">
+                    <div class="relative pl-10 sm:pl-12 border-l-2 border-dashed border-gray-300 py-4 space-y-6 sm:space-y-8">
+                        <div class="timeline-item">
                             <time class="font-mono text-sm text-[#d1a388]">Late Morning</time>
                             <h4 class="font-semibold text-lg text-gray-900">Israel Museum</h4>
                             <p class="text-gray-600">Visiting the special exhibition <span class="font-bold">'כריס מרקר: הצילומים האבודים מישראל'</span>, featuring black and white photos from the 1960s.</p>
                         </div>
-                        <div class="timeline-item mb-8">
+                        <div class="timeline-item">
                             <time class="font-mono text-sm text-[#d1a388]">15:00</time>
                             <h4 class="font-semibold text-lg text-gray-900">Hotel Check-in & Relaxation</h4>
-                            <p class="text-gray-600">We'll check into the beautiful <span class="font-bold">The American Colony Hotel</span> and unwind by the pool.</p>
+                            <p class="text-gray-600">We'll check into the beautiful <span class="font-bold">The American Colony Hotel</span> to room with a balcony and chill by the pool (Dotted Wine included! 🍷).</p>
                         </div>
-                        <div class="timeline-item mb-8">
+                        <div class="timeline-item">
                             <time class="font-mono text-sm text-[#d1a388]">19:00</time>
-                            <h4 class="font-semibold text-lg text-gray-900">Sunset Over the Old City</h4>
+                            <h4 class="font-semibold text-lg text-gray-900">Sunset Drinks Over the Old City</h4>
                             <p class="text-gray-600">Experience breathtaking views of the sunset from the <span class="font-bold">Notre Dame Hotel</span> rooftop.</p>
                         </div>
                         <div class="timeline-item">
                             <time class="font-mono text-sm text-[#d1a388]">20:30</time>
                             <h4 class="font-semibold text-lg text-gray-900">Birthday Dinner at Mona</h4>
-                            <p class="text-gray-600">A special and delicious birthday dinner to celebrate you.</p>
+                            <p class="text-gray-600">A special and delicious birthday dinner (20m walk from the Notre Dame Hotel).</p>
                         </div>
                     </div>
                 </div>
@@ -189,19 +212,20 @@
                     <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="day2-content" class="accordion-content">
-                    <div class="relative pl-12 border-l-2 border-dashed border-gray-300 py-4">
-                        <div class="timeline-item mb-8">
+                    <div class="relative pl-10 sm:pl-12 border-l-2 border-dashed border-gray-300 py-4 space-y-6 sm:space-y-8">
+                        <div class="timeline-item">
                             <time class="font-mono text-sm text-[#d1a388]">Morning</time>
                             <h4 class="font-semibold text-lg text-gray-900">A Leisurely Morning</h4>
-                            <p class="text-gray-600">Enjoy a slow morning, perhaps with another dip in the pool or a quiet coffee in the hotel gardens.</p>
-                        </div>
-                        <div class="timeline-item mb-8">
-                            <time class="font-mono text-sm text-[#d1a388]">14:00</time>
-                            <h4 class="font-semibold text-lg text-gray-900">Wine Tasting at Sfera Winery</h4>
-                            <p class="text-gray-600">We'll head to <span class="font-bold">יקב ספרה</span> for a delightful wine tasting experience.</p>
+                            <p class="text-gray-600">A slow morning, perhaps with another dip in the pool or a quiet coffee in the hotel gardens.</p>
                         </div>
                         <div class="timeline-item">
-                            <h4 class="font-semibold text-lg text-gray-900">Afternoon: Homeward Bound</h4>
+                            <time class="font-mono text-sm text-[#d1a388]">14:00</time>
+                            <h4 class="font-semibold text-lg text-gray-900">Wine Tasting at Sfera Winery</h4>
+                            <p class="text-gray-600">We'll head to <span class="font-bold">יקב ספרה</span> to get some more wine.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <time class="font-mono text-sm text-[#d1a388]">Afternoon</time>
+                            <h4 class="font-semibold text-lg text-gray-900">Homeward Bound</h4>
                             <p class="text-gray-600">Driving home relaxed, happy, and full of wonderful new memories.</p>
                         </div>
                     </div>
